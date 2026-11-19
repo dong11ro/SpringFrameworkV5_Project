@@ -9,11 +9,12 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class HelloBeanJunitTest {
+	BeanFactory factory;
 	
 	@BeforeEach
 	void container() {
 		// 1. Bean 0. 생성
-		BeanFactory factory = new GenericXmlApplicationContext("classpath:spring-beans.xml");
+		factory = new GenericXmlApplicationContext("classpath:spring-beans.xml");
 	}
 	
 	@Test
@@ -40,5 +41,7 @@ public class HelloBeanJunitTest {
 		
 		// 값 비교  
 		Assertions.assertEquals(printer.toString(), "Hello 스프링");
+		
+		Hello helloConsole = factory.getBean("helloCons", Hello.class);
 	}
 }
