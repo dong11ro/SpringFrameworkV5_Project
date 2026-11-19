@@ -1,6 +1,7 @@
 package myspring.di.xml;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 // import org.junit.jupiter.api.Assertions.*; 을 하면
 // Assertions의 클래스의 모든 static 메서드를 import 한다. Assertions.을 붙일 필요 없음.
 import org.junit.jupiter.api.Test;
@@ -9,10 +10,15 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class HelloBeanJunitTest {
 	
-	@Test
-	void hello() {
+	@BeforeEach
+	void container() {
 		// 1. Bean 0. 생성
 		BeanFactory factory = new GenericXmlApplicationContext("classpath:spring-beans.xml");
+	}
+	
+	@Test
+	void hello() {
+		
 		//2. Hello Bean을 Container에게 요청하기 Bean의 id 기준으로 객체 요청. 
 		Hello helloById = (Hello)factory.getBean("hello");
 		// 2-1. Hello Bean을 Container에게 요청하기 Bean의 id와 type 기준으로 Bean 요청
